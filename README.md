@@ -1,0 +1,1 @@
+Simple stopwatch app for exercising asynchronous programming
