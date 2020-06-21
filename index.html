@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8">
-    <title>Simple setInterval clock</title>
+    <title>Simple stopwatch</title>
     <style>
       p {
         font-family: sans-serif;
@@ -10,23 +10,60 @@
     </style>
   </head>
   <body>
-    <p class="clock"></p>
+    <p class="stopwatch"></p>
     <button id="start">START</button>
-    <button id="pause">PAUSE/STOP</button>
+    <button id="stop">PAUSE/STOP</button>
     <button id="reset">RESET</button>
     <script>
 
-      let seconds = 0;
+
+      let startBtn = document.querySelector('#start');
+      let stopBtn = document.querySelector('#stop');
+      let resetBtn = document.querySelector('#reset');
+      let createStopwatch;
+      let startTime;
+
+
+      startBtn.addEventListener('click', () => {
+
+        startTime = Date.now();
+        createStopwatch = setInterval(displayTime, 1000);
+        startBtn.disabled = true;
+
+      });
+
+
+      function displayTime() {
+
+        // let stopTime = Date.now();
+        let runningTime = Math.floor((Date.now() - startTime) / 1000);
+        let h = Math.floor(runningTime / 3600);
+        let m = Math.floor(runningTime % 3600 / 60);
+        let s = Math.floor(runningTime % 3600 % 60);
+
+        if(h < 10) {h = '0' + h};
+        if(m < 10) {m = '0' + m};
+        if(s < 10) {s = '0' + s};
+        document.querySelector('.stopwatch').textContent = `${h}:${m}:${s}`;
+        // console.log(runningTime);
+        console.log(startTime);
+
+      };
+
+
+
+      
 
       // Template from MDN that i need to modify
-      function displayTime() {
-        let date = new Date();
-        let time = date.toLocaleTimeString();
-        document.querySelector('.clock').textContent = time;
-      }
+      // function displayTime() {
+      //   let date = new Date();
+      //   let time = date.toLocaleTimeString();
+      //   document.querySelector('.clock').textContent = time;
+      // }
 
-      displayTime();
-      const createClock = setInterval(displayTime, 1000);
+
+      // displayTime();
+      // const createClock = setInterval(displayTime, 1000);
     </script>
   </body>
 </html>
