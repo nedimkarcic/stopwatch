@@ -10,7 +10,7 @@
     </style>
   </head>
   <body>
-    <p class="stopwatch"></p>
+    <p class="stopwatch"> 00:00:00 </p>
     <button id="start">START</button>
     <button id="stop">PAUSE/STOP</button>
     <button id="reset">RESET</button>
@@ -29,6 +29,20 @@
         startTime = Date.now();
         createStopwatch = setInterval(displayTime, 1000);
         startBtn.disabled = true;
+
+      });
+
+      stopBtn.addEventListener('click', () => {
+
+        clearInterval(createStopwatch);
+        startBtn.disabled = false;
+
+
+      });
+
+      resetBtn.addEventListener('click', () => {
+
+        document.querySelector('.stopwatch').textContent = ' 00:00:00 ';
 
       });
 
